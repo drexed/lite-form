@@ -1,8 +1,3 @@
-require "lite/form/version"
+# frozen_string_literal: true
 
-module Lite
-  module Form
-    class Error < StandardError; end
-    # Your code goes here...
-  end
-end
+require 'lite/form/version'
