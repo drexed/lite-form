@@ -77,8 +77,11 @@ class UserForm < ApplicationForm
   end
 
   def update_action
-    user = User.find(attributes[:id])
-    update_and_return!(user, attributes.slice(:id))
+    ActiveRecord::Base.transaction do
+      user = User.find(attributes[:id])
+      update_and_return!(user, attributes.slice(:id))
+      update_and_return!(user.settings, tour: false)
+    end
   end
 
   def prepend_signature!
