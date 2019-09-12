@@ -70,7 +70,7 @@ class UserForm < ApplicationForm
   def create_action
     # Propagation methods help you perform an action on an object.
     # If successful is returns the result else it adds the object
-    # errors to the form object. Available propagation methods are
+    # errors to the form object. Available propagation methods are:
     # `create_and_return!(object, params)`, `update_and_return!(object, params)`,
     # `save_and_return!(object)`, and `destroy_and_return!(object)`
     create_and_return!(User, attributes)

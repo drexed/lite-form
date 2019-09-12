@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.0] - 2019-09-01
+## [1.0.1] - 2019-09-12
+### Fixed
+- Fixed issue where create propagation was being returned without errors
+
+## [1.0.0] - 2019-09-12
 ### Added
 - Initial project version
