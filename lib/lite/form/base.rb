@@ -13,7 +13,7 @@ module Lite
       include ActiveModel::Dirty
       include ActiveModel::Serialization
       include Lite::Form::Helpers::Errors
-      include Lite::Form::Helpers::Persistance
+      include Lite::Form::Helpers::Persistence
       include Lite::Form::Helpers::Propagation
 
       define_model_callbacks :initialize

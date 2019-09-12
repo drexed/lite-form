@@ -9,6 +9,8 @@ class FooPropagationForm < Lite::Form::Base
 
   validates :name, presence: true
 
+  private
+
   def update_action
     user = User.last
     update_and_return!(user, attributes)

@@ -3,13 +3,13 @@
 module Lite
   module Form
     module Helpers
-      module Persistance
+      module Persistence
 
         module ClassMethods
 
           %i[create save update].each do |method_name|
-            define_method(method_name) do |**args|
-              klass = new(**args)
+            define_method(method_name) do |params = {}|
+              klass = new(params)
               klass.send(method_name)
               klass
             end

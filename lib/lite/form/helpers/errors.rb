@@ -7,8 +7,8 @@ module Lite
 
         module ClassMethods
 
-          def perform(action, **args)
-            klass = send(action, **args)
+          def perform(action, params = {})
+            klass = %w[create update].include?(action.to_s) ? send(action, params) : send(action)
 
             if klass.success?
               yield(klass.result, Lite::Form::Success, Lite::Form::Failure)

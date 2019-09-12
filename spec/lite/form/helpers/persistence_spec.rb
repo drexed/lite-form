@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-class FooPersistanceForm < Lite::Form::Base
+class FooPersistenceForm < Lite::Form::Base
 
   attribute :name, :string
   attribute :age, :integer, default: 18
@@ -14,11 +14,11 @@ class FooPersistanceForm < Lite::Form::Base
   before_create :prepend_signature!
   after_create :append_signature!
 
+  private
+
   def create_action
     self.name = 'Jane Doe'
   end
-
-  private
 
   def prepend_signature!
     self.signature = "Prefix #{name}"
@@ -30,18 +30,18 @@ class FooPersistanceForm < Lite::Form::Base
 
 end
 
-RSpec.describe Lite::Form::Helpers::Persistance do
-  let(:foo) { FooPersistanceForm.new(params) }
+RSpec.describe Lite::Form::Helpers::Persistence do
+  let(:foo) { FooPersistenceForm.new(params) }
 
   let(:params) do
     { name: 'John Doe' }
   end
 
-  describe '#persistance' do
+  describe '#persistence' do
     context 'when testing setup' do
       it 'to be an Lite::Form::NotImplementedError error' do
         expect { foo.save }.to raise_error(Lite::Form::NotImplementedError)
-        expect { FooPersistanceForm.save }.to raise_error(Lite::Form::NotImplementedError)
+        expect { FooPersistenceForm.save }.to raise_error(Lite::Form::NotImplementedError)
       end
     end
 
@@ -53,7 +53,7 @@ RSpec.describe Lite::Form::Helpers::Persistance do
       end
 
       it 'to be "Jane Doe" for class object' do
-        foo = FooPersistanceForm.create(params)
+        foo = FooPersistenceForm.create(params)
 
         expect(foo.name).to eq('Jane Doe')
       end

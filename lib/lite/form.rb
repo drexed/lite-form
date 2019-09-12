@@ -3,7 +3,7 @@
 require 'active_model'
 require 'lite/form/version'
 
-%w[propagation persistance errors].each do |name|
+%w[propagation persistence errors].each do |name|
   require "lite/form/helpers/#{name}"
 end
 

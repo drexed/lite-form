@@ -9,6 +9,8 @@ class FooErrorsForm < Lite::Form::Base
 
   validates :name, presence: true
 
+  private
+
   def create_action
     123
   end
