@@ -1,0 +1,9 @@
+Description:
+    Generate a form file
+
+Example:
+    rails generate form NAME
+
+    This will create:
+        - app/forms/[name]_form.rb
+        - spec/forms/[name]_form_spec.rb
