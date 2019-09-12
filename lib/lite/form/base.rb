@@ -6,17 +6,38 @@ module Lite
 
       extend ActiveModel::Callbacks
       extend ActiveModel::Naming
+      extend ActiveModel::Translation
 
+      include ActiveModel::Model
       include ActiveModel::Attributes
       include ActiveModel::Dirty
-      include ActiveModel::Model
       include ActiveModel::Serialization
       include Lite::Form::Helpers::Errors
       include Lite::Form::Helpers::Persistance
+      include Lite::Form::Helpers::Propagation
 
+      define_model_callbacks :initialize
       define_model_callbacks :create
       define_model_callbacks :save
       define_model_callbacks :update
+
+      class << self
+
+        def model_name
+          klass = name.gsub('Form', '')
+          klass = Object.const_get(klass)
+          klass.model_name
+        rescue StandardError
+          super
+        end
+
+      end
+
+      attr_reader :result
+
+      def initialize(params = {})
+        run_callbacks(:initialize) { super(params) }
+      end
 
     end
   end

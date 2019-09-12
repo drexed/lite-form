@@ -7,8 +7,8 @@ module Lite
 
         module ClassMethods
 
-          def perform(*args)
-            klass = call(*args)
+          def perform(action, **args)
+            klass = send(action, **args)
 
             if klass.success?
               yield(klass.result, Lite::Form::Success, Lite::Form::Failure)
