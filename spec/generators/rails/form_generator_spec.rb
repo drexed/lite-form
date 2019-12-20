@@ -11,7 +11,6 @@ RSpec.describe Rails::FormGenerator, type: :generator do
   end
 
   let(:form_path) { 'spec/generators/tmp/app/forms/v1/users/age_form.rb' }
-  let(:rspec_path) { 'spec/generators/tmp/spec/forms/v1/users/age_form_spec.rb' }
 
   describe '#generator' do
     context 'when generating app files' do
@@ -21,22 +20,9 @@ RSpec.describe Rails::FormGenerator, type: :generator do
 
       it 'to include the proper markup' do
         form_file = File.read(form_path)
-        text_snippet = 'class V1::Users::AgeForm < ApplicationForm'
+        text_snippet = 'class V1::Users::AgeForm < Lite::Form::Base'
 
         expect(form_file.include?(text_snippet)).to eq(true)
-      end
-    end
-
-    context 'when generating spec files' do
-      it 'to be true when form file exists' do
-        expect(File.exist?(rspec_path)).to eq(true)
-      end
-
-      it 'to include the proper markup' do
-        rspec_file = File.read(rspec_path)
-        text_snippet = 'V1::Users::AgeForm, type: :form'
-
-        expect(rspec_file.include?(text_snippet)).to eq(true)
       end
     end
   end

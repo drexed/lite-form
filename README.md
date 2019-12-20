@@ -30,18 +30,21 @@ Or install it yourself as:
 
 ## Setup
 
-`rails g lite:form:install` will generate the following file:
-`../app/forms/application_form.rb`
+### Generators
 
-```ruby
-class ApplicationForm < Lite::Form::Base
-end
+Use `rails g form NAME` will generate the following files:
+
+```erb
+app/forms/[name]_form.rb
 ```
 
-Use `rails g form NAME` will generate the following file:
-`../app/forms/[name]_form.rb`
+If a `ApplicationForm` file in the `app/forms` directory is available, the
+generator will create file that inherit from `ApplicationForm` if not it will
+fallback to `Lite::Form::Base`.
 
-You will then need to fill this class with the methods and actions you want to perform:
+### Forms
+
+You will need to fill this class with the methods and actions you want to perform:
 
 ```ruby
 class UserForm < ApplicationForm

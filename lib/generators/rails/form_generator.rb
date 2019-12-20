@@ -14,12 +14,6 @@ module Rails
       template('form.rb.tt', path)
     end
 
-    def copy_specs
-      path = File.join('spec', 'forms', class_path, "#{file_name}_form_spec.rb")
-      empty_directory('spec/forms')
-      template('spec.rb.tt', path)
-    end
-
     private
 
     def file_name

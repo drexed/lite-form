@@ -6,4 +6,3 @@ Example:
 
     This will create:
         - app/forms/[name]_form.rb
-        - spec/forms/[name]_form_spec.rb

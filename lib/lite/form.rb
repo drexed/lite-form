@@ -11,5 +11,4 @@ end
   require "lite/form/#{name}"
 end
 
-require 'generators/lite/form/install_generator'
 require 'generators/rails/form_generator'
