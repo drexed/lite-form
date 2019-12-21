@@ -6,7 +6,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-## [1.0.2] - 2019-09-16
+## [1.0.4] - 2019-12-21
+### Removed
+- Removed generator empty directory check
+
+## [1.0.3] - 2019-09-16
 ### Removed
 - Removed lite-form generator
 - Removed spec from rails generator

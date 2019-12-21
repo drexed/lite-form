@@ -10,7 +10,6 @@ module Rails
 
     def copy_files
       path = File.join('app', 'forms', class_path, "#{file_name}_form.rb")
-      empty_directory('app/forms')
       template('form.rb.tt', path)
     end
 
