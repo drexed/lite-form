@@ -59,9 +59,9 @@ class UserForm < ApplicationForm
   # Setup your form validations like you would on model objects
   validates :name, presence: true
 
-  # Access 4 predefined callbacks to trigger before, after, and
+  # Access 6 predefined callbacks to trigger before, after, and
   # around your actions. Available callbacks are `initialize`
-  # `create`, `save`, and `update`
+  # `commit`, `create`, `rollback`, `save`, and `update`.
   before_create :prepend_signature!
   after_update :append_signature!
 
@@ -74,17 +74,26 @@ class UserForm < ApplicationForm
     # Propagation methods help you perform an action on an object.
     # If successful is returns the result else it adds the object
     # errors to the form object. Available propagation methods are:
-    # `create_and_return!(object, params)`, `update_and_return!(object, params)`,
-    # `save_and_return!(object)`, and `destroy_and_return!(object)`
+    # `create_and_return!(object, params)`,
+    # `update_and_return!(object, params)`,
+    # `save_and_return!(object)`
     create_and_return!(User, attributes)
   end
 
   def update_action
-    ActiveRecord::Base.transaction do
-      user = User.find(attributes[:id])
-      update_and_return!(user, attributes.slice(:id))
-      update_and_return!(user.settings, tour: false)
+    run_callbacks(:commit) do
+      ActiveRecord::Base.transaction do
+        user = User.find(attributes[:id])
+        update_and_return!(user, attributes.slice(:id))
+
+        # The `save_and_return!` supports on/off validation
+        user.settings.web_notification = true
+        save_and_return!(user.settings, validate: false)
+      end
     end
+  rescue StandardError => e
+    # This will run the `rollback` callback and re-raise the error.
+    raise_transaction_rollback(e)
   end
 
   def prepend_signature!
@@ -101,7 +110,6 @@ end
 ## Usage
 
 To access the form you need to pass the object to the form class and thats it.
-You can even decorate a collection of objects by passing the collection to `decorate`.
 
 ```ruby
 form = UserForm.new(params)
@@ -139,7 +147,9 @@ include ActiveModel::Serialization
 
 # Default callbacks that are defined
 define_model_callbacks :initialize
+define_model_callbacks :commit
 define_model_callbacks :create
+define_model_callbacks :rollback
 define_model_callbacks :save
 define_model_callbacks :update
 ```

@@ -7,16 +7,14 @@ module Lite
 
         private
 
-        %i[archive destroy save].each do |action|
-          define_method("#{action}_and_return!") do |klass|
-            merge_errors!(klass) unless klass.send(action)
-            klass
-          end
-        end
-
         def create_and_return!(klass, params)
           klass = klass.create(params)
           merge_errors!(klass) unless klass.errors.empty?
+          klass
+        end
+
+        def save_and_return!(klass, *args)
+          merge_errors!(klass) unless klass.save(*args)
           klass
         end
 

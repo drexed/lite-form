@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.5] - 2020-05-20
+### Added
+- Added save args
+- Added more callback support
+### Removed
+- Removed archive and destroy propagation
+
 ## [1.0.4] - 2019-12-21
 ### Removed
 - Removed generator empty directory check

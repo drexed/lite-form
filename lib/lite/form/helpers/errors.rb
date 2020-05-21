@@ -50,6 +50,11 @@ module Lite
           errors.empty?
         end
 
+        def raise_transaction_rollback(exception)
+          run_callbacks(:rollback)
+          raise exception
+        end
+
       end
     end
   end
