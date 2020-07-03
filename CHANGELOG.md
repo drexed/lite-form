@@ -8,6 +8,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [1.0.5] - 2020-05-20
 ### Added
+- Added ruby 2.7 support
 - Added save args
 - Added more callback support
 ### Removed
