@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    lite-form (1.1.1)
+    lite-form (1.1.2)
       activemodel
 
 GEM
