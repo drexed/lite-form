@@ -1,8 +1,9 @@
 # frozen_string_literal: true
 
 require 'bundler/setup'
-require 'lite/form'
+require 'rails/generators'
 require 'active_record'
+require 'lite/form'
 require 'generator_spec'
 
 spec_path = Pathname.new(File.expand_path('../spec', File.dirname(__FILE__)))
